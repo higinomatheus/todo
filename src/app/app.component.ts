@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Todo } from '../models/todo.model';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  public todos: any[] = [];
+  public todos: Todo[] = [];
   public title: String = 'Minas Tarefas';
 
   constructor() {
-    this.todos.push('passear com o cachoro');
-    this.todos.push('ir ao supermercado');
-    this.todos.push('cortar o cabelo');
-    this.todos.push(1999);
-    this.todos.push(new Date());
+    this.todos.push(new Todo(1, 'Passear com o cachorro', false));
+    this.todos.push(new Todo(2, 'Ir ao supermercado', true));
+    this.todos.push(new Todo(3, 'Cortar o cabelo', false));
   }
 
 } 
