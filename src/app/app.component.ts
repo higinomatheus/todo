@@ -26,7 +26,7 @@ export class AppComponent {
 			])]
 		});
 
-		setTimeout(() => this.load(), 1000);
+		setTimeout(() => this.load(), 500);
 	}
 
 	add() {
@@ -62,10 +62,11 @@ export class AppComponent {
 	save() {
 		const data = JSON.stringify(this.todos);
 		localStorage.setItem('todos', data);
+		this.mode = 'list';
 	}
 
-	load(){
-		if(typeof localStorage !== 'undefined'){
+	load() {
+		if (typeof localStorage !== 'undefined') {
 			const data = localStorage.getItem('todos') || '';
 			const items = JSON.parse(data);
 			this.todos = items !== '' ? items : [];
@@ -74,7 +75,7 @@ export class AppComponent {
 		}
 	}
 
-	changeMode(mode: string){
+	changeMode(mode: string) {
 		this.mode = mode;
 	}
 }
