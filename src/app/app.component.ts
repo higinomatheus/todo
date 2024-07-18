@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 	styleUrl: './app.component.css',
 })
 export class AppComponent {
+	public mode: string = 'list';
 	public todos: Todo[] = [];
 	public title: String = 'Minhas Tarefas';
 	public form: FormGroup;
@@ -25,7 +26,7 @@ export class AppComponent {
 			])]
 		});
 
-		setTimeout(() => this.load(), 500);
+		setTimeout(() => this.load(), 1000);
 	}
 
 	add() {
@@ -64,9 +65,16 @@ export class AppComponent {
 	}
 
 	load(){
-		console.log('localStorage', localStorage);
-		const data = localStorage.getItem('todos') || '';
-		const items = JSON.parse(data);
-		this.todos = items !== '' ? items : [];
+		if(typeof localStorage !== 'undefined'){
+			const data = localStorage.getItem('todos') || '';
+			const items = JSON.parse(data);
+			this.todos = items !== '' ? items : [];
+		} else {
+			console.warn('localStorage is not available');
+		}
+	}
+
+	changeMode(mode: string){
+		this.mode = mode;
 	}
 }
